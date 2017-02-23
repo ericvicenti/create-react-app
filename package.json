@@ -5,6 +5,7 @@
     "changelog": "lerna-changelog",
     "create-react-app": "tasks/cra.sh",
     "e2e": "tasks/e2e-simple.sh",
+    "component-e2e": "tasks/component-e2e.sh",
     "postinstall": "lerna bootstrap",
     "publish": "tasks/release.sh",
     "start": "node packages/react-scripts/scripts/start.js",
@@ -18,7 +19,7 @@
     "eslint-plugin-import": "2.0.1",
     "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-react": "6.4.1",
-    "lerna": "^2.0.0-beta.37",
+    "lerna": "2.0.0-beta.37",
     "lerna-changelog": "^0.2.3"
   }
 }
