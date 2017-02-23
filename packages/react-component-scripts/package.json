@@ -1,7 +1,22 @@
 {
   "name": "react-component-scripts",
   "version": "0.1.0",
+  "description": "Configuration and scripts for Create React Component.",
+  "repository": "facebookincubator/create-react-app",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">=4"
+  },
+  "bugs": {
+    "url": "https://github.com/facebookincubator/create-react-app/issues"
+  },
+  "files": [
+    ".babelrc",
+    ".eslintrc",
+    "bin",
+    "scripts"
+  ],
   "bin": {
-    "build": "echo HelloThere"
+    "react-component-scripts": "./bin/react-component-scripts.js"
   }
 }
