@@ -1,0 +1,7 @@
+{
+  "name": "react-component-scripts",
+  "version": "0.1.0",
+  "bin": {
+    "build": "echo HelloThere"
+  }
+}
