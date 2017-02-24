@@ -70,10 +70,15 @@ module.exports = function(appPath, componentName, verbose, originalDirectory, te
   });
 
   // Copy and rename the main component file
-  var componentBody = fs.readFileSync(path.join(appPath, 'src','MyComponent.js'), {encoding: 'utf8'});
-  fs.unlinkSync(path.join(appPath, 'src', 'MyComponent.js'));
-  componentBody = componentBody.split('MyComponent').join(properComponentName);
-  fs.writeFileSync(path.join(appPath, 'src', properComponentName + '.js'), componentBody);
+  function moveAndRenameFile(pathInApp, prevName, newName) {
+    var fileBody = fs.readFileSync(path.join(appPath, pathInApp), {encoding: 'utf8'});
+    fs.unlinkSync(path.join(appPath, pathInApp));
+    fileBody = fileBody.split(prevName).join(newName);
+    var newPathInApp = pathInApp.split(prevName).join(newName);
+    fs.writeFileSync(path.join(appPath, newPathInApp), fileBody);
+  }
+  moveAndRenameFile(path.join('src', 'MyComponent.js'), 'MyComponent', properComponentName);
+  moveAndRenameFile(path.join('src', 'MyComponent.test.js'), 'MyComponent', properComponentName);
 
   // Run yarn or npm for react and react-dom
   // TODO: having to do two npm/yarn installs is bad, can we avoid it?
