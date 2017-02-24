@@ -33,7 +33,7 @@ const path = require('path');
 const paths = require('../config/paths');
 argv.push('--config', JSON.stringify(createJestConfig(
   relativePath => path.resolve(__dirname, '..', relativePath),
-  path.resolve(paths.appSrc, '..'),
+  path.resolve(paths.libSrc, '..'),
   false
 )));
 // @remove-on-eject-end
