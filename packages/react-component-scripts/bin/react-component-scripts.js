@@ -8,7 +8,12 @@ switch (script) {
   case 'eject':
   case 'start':
   case 'test':
-    var result = spawn.sync('node', [require.resolve('../scripts/' + script)].concat(args), { stdio: 'inherit' });
+    var result = spawn.sync('node', [require.resolve('../scripts/' + script)].concat(args), {
+      stdio: 'inherit',
+      env: Object.assign({}, process.env, {
+        NODE_ENV: process.env.NODE_ENV || 'development',
+      }),
+    });
     if (result.signal) {
       if (result.signal === 'SIGKILL') {
         console.log(
