@@ -1,6 +1,7 @@
 var babel = require('babel-core');
 var chalk = require('chalk');
 var fs = require('fs');
+var micromatch = require('micromatch');
 var path = require('path');
 var outputFileSync = require('output-file-sync');
 var slash = require('slash');
@@ -8,13 +9,21 @@ var paths = require('../config/paths');
 var readdir = require('../utils/readdir').readdir;
 
 var DEFAULT_COMPILABLE_EXTENSIONS = ['.es6', '.js', '.es', '.jsx'];
+var SRC_IGNORE_PATTERNS = [
+  // Default Jest testMatch patterns
+  '**/__tests__/**/*.js?(x)',
+  '**/?(*.)(spec|test).js?(x)',
+
+  // Storybook patterns
+  '**/?(.*).storybook.js?(x)',
+];
 var SRC_DIR = paths.libSrc;
 var BUILD_DIR = paths.libBuild;
 var ENABLE_SOURCE_MAPS = true; // TODO make this optional?
 
 console.log();
-console.log('>>> Creating ES5-compatible build...');
-console.log('>>> Running `src` directory through Babel...');
+console.log(chalk.cyan('> Creating ES5-compatible build...'));
+console.log(chalk.cyan('> Building with Babel...'));
 
 readdir(SRC_DIR).forEach(function(filename) {
   var src = path.join(SRC_DIR, filename);
@@ -26,7 +35,12 @@ console.log(chalk.green('Compiled successfully.'));
 console.log();
 
 function _handleFile(src, filename) {
-  // if (babel.shouldIgnore(filename).sho)
+  const ignoreRegexes = SRC_IGNORE_PATTERNS.map(function(patt) {
+    return micromatch.makeRe(patt);
+  });
+  if (babel.util.shouldIgnore(src, ignoreRegexes)) {
+    return;
+  }
   if (babel.util.canCompile(filename, DEFAULT_COMPILABLE_EXTENSIONS)) {
     _write(src, filename);
   } else {
@@ -60,7 +74,7 @@ function _write(src, relative) {
   outputFileSync(dest, data.code);
   _chmod(src, dest);
 
-  console.log('  ' + src + ' -> ' + dest);
+  console.log(`  ${src} -> ${dest}`);
 }
 
 function _compile(filename, opts) {

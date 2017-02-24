@@ -31,6 +31,7 @@
     "fs-extra": "^2.0.0",
     "fs-readdir-recursive": "^1.0.0",
     "jest": "^19.0.2",
+    "micromatch": "^2.3.11",
     "output-file-sync": "^1.1.2",
     "pascalcase": "^0.1.1",
     "slash": "^1.0.0"
