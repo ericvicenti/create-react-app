@@ -25,6 +25,7 @@
     "cross-spawn": "^5.0.1",
     "dotenv": "^4.0.0",
     "fs-extra": "^2.0.0",
+    "fs-readdir-recursive": "^1.0.0",
     "pascalcase": "^0.1.1"
   }
 }
