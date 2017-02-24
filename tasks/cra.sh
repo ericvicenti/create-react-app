@@ -61,7 +61,7 @@ cp package.json package.json.orig
 
 # Replace own dependencies (those in the `packages` dir) with the local paths
 # of those packages.
-node $root_path/tasks/replace-own-deps.js
+node $root_path/tasks/replace-own-deps.js 'react-scripts/package.json'
 
 # Finally, pack react-scripts
 scripts_path=$root_path/packages/react-scripts/`npm pack`
