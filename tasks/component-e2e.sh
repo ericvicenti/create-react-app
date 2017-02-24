@@ -131,7 +131,7 @@ create_react_component --scripts-version=$scripts_path test-component
 cd test-component
 
 # Test the build
-# npm run build
+npm run build
 
 # Check for expected output
 exists package.json
