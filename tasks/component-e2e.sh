@@ -78,7 +78,7 @@ npm install
 if [ "$USE_YARN" = "yes" ]
 then
   # Install Yarn so that the test can use it to install packages.
-  npm install -g yarn
+  # npm install -g yarn
   yarn cache clean
 fi
 
